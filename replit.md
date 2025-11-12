@@ -134,3 +134,33 @@ Preferred communication style: Simple, everyday language.
 - Supabase client is installed but no active database connection or queries are implemented
 - The application is prepared for form validation with Zod but minimal schemas are defined
 - Lovable-tagger plugin is used in development for component tagging (development-only feature)
+
+## Replit Environment Setup
+
+**Date Configured**: November 12, 2025
+
+### Development Workflow
+- **Workflow Name**: dev-server
+- **Command**: `npm run dev`
+- **Port**: 5000 (configured for webview)
+- **Host**: 0.0.0.0 with allowedHosts enabled for Replit proxy compatibility
+
+### Deployment Configuration
+- **Deployment Type**: VM (always-on)
+- **Build Command**: `npm run build`
+- **Run Command**: `npm run start`
+- **Production Port**: 5000
+
+### Key Replit Configurations
+1. **Vite Configuration**: Already includes `host: "0.0.0.0"` and `allowedHosts: true` for Replit's proxy/iframe setup
+2. **Server Configuration**: Express server binds to `0.0.0.0:5000` in both development and production
+3. **Package Management**: Using npm with Node.js runtime
+4. **Environment Variables**: Supabase credentials (VITE_SUPABASE_URL, VITE_SUPABASE_PUBLISHABLE_KEY) are optional - app functions without them
+
+### Recent Changes
+- **November 12, 2025**: 
+  - Created .gitignore for Node.js project
+  - Configured dev-server workflow for port 5000 with webview output
+  - Configured VM deployment for production
+  - Verified frontend loads correctly with all animations and components working
+  - Installed all npm dependencies successfully
