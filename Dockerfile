@@ -14,13 +14,13 @@ FROM node:18
 
 WORKDIR /app
 
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/package*.json ./
+# Copiamos el código y node_modules desde la etapa de build
+COPY --from=builder /app ./app
+WORKDIR /app
 
 ENV NODE_ENV=production
-ENV PORT=80 
-
+ENV PORT=80
 EXPOSE 80
 
-CMD ["node", "dist/server/index.js"]
+CMD ["npm", "start"]
+
