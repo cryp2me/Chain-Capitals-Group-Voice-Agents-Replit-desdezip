@@ -16,14 +16,13 @@ FROM node:20
 
 WORKDIR /app
 
-# Solo copiamos lo necesario para ejecutar el server
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/node_modules ./node_modules
+# Copiamos TODO el proyecto ya compilado (incluye package.json, dist, node_modules, etc.)
+COPY --from=builder /app ./
 
 ENV NODE_ENV=production
 ENV PORT=3000
 
 EXPOSE 3000
 
-# Arrancamos directamente el JS compilado, sin npm start
-CMD ["node", "dist/server/index.js"]
+# Arrancamos igual que en Replit
+CMD ["npm", "start"]
