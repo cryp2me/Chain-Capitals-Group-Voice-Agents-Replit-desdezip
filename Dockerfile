@@ -19,6 +19,7 @@ COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package*.json ./
 
 ENV NODE_ENV=production
+ENV PORT=80 
 
 EXPOSE 80
 
