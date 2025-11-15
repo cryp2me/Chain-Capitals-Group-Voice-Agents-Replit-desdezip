@@ -1,26 +1,29 @@
 # Etapa de build
-FROM node:18 AS builder
+FROM node:20 AS builder
 
 WORKDIR /app
 
+# 1) Instalar dependencias
 COPY package*.json ./
 RUN npm install
 
+# 2) Copiar el código y hacer el build
 COPY . .
 RUN npm run build
 
 # Etapa de producción
-FROM node:18
+FROM node:20
 
 WORKDIR /app
 
-# Copiamos el código y node_modules desde la etapa de build
-COPY --from=builder /app ./app
-WORKDIR /app
+# Solo copiamos lo necesario para ejecutar el server
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/node_modules ./node_modules
 
 ENV NODE_ENV=production
-ENV PORT=80
-EXPOSE 80
+ENV PORT=3000
 
-CMD ["npm", "start"]
+EXPOSE 3000
 
+# Arrancamos directamente el JS compilado, sin npm start
+CMD ["node", "dist/server/index.js"]
